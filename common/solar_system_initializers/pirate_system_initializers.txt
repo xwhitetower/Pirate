@@ -1,0 +1,549 @@
+# Game will first pick an initializer using usage_odds, but only use it if it passes the spawn_chance check
+# Even if it fails the spawn_chance check it will still count towards the initializer's max_instances
+
+@base_moon_distance = 10
+
+# Pirate Enclave
+pirate_enclave_init_01 = {
+	class = random
+	asteroids_distance = { min = 40 max = 60 }
+	usage = misc_system_init
+	usage_odds = {
+        base 100
+#		base = 0
+#		modifier = {
+#			has_leviathans = yes
+#			add = 100
+#		}
+#		modifier = {
+#			factor = 0
+#			is_fe_cluster = yes
+#		}
+	}
+
+	max_instances = 1
+	spawn_chance = 100
+	#scaled_spawn_chance = 8	# scales by galaxy size (1000 stars = 10x base)
+
+	flags = { pirate_enclave_system pirate_enclave }
+
+	planet = {
+		count = 1
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+	}
+
+	change_orbit = 45
+
+	planet = {
+		count = 1
+		class = pc_barren
+		size = 25
+		orbit_angle = { min = 90 max = 270 }
+	}
+
+	planet = {
+		count = 1
+		orbit_distance = 30
+		class = rl_unhabitable_planets
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+
+		init_effect = {
+			set_planet_flag = pirate_enclave_planet
+			create_species = {
+				name = random
+				class = random
+				portrait = random
+				traits = random
+				homeworld = this
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = event_target:pirate_enclave_country
+					}
+				}
+				create_country = {
+					name = "Pirate Band"
+					type = enclave
+					authority = "auth_democratic"
+					civics = {
+						civic = civic_pe_pirate_collective
+					}
+					species = last_created
+					flag = {
+						icon = {
+							category = "enclaves"
+							file = "enclaves_flag_artist.dds"
+						}
+						background = {
+							category = "backgrounds"
+							file = "vertical.dds"
+						}
+						colors = {
+							"dark_purple"
+							"purple"
+							"null"
+							"null"
+						}
+					}
+					ethos = {
+						ethic = ethic_fanatic_militarist
+						ethic = ethic_materialist
+					}
+					ignore_initial_colony_error = yes
+				}
+				last_created_country = {
+					save_global_event_target_as = pirate_enclave_country
+					set_country_flag = pirate_enclave_country
+					set_graphical_culture = mammalian_01
+					create_fleet = {
+						name = "Mêlée Station"
+						settings = { spawn_debris = no }
+						effect = {
+							set_owner = prev
+							create_ship = {
+								name = random
+								design = "Artist Enclave Station"
+								graphical_culture = prev
+							}
+							set_location = {
+								target = prevprev
+								distance = 90
+							}
+							save_event_target_as = CustomCapital
+							prev = {
+								set_custom_capital_location = event_target:CustomCapital
+							}
+						}
+					}
+					create_leader = {
+						type = ruler
+						species = prev
+						name = random
+						skill = 2000
+					}
+					set_leader = last_created_leader
+				}
+				else = {
+					event_target:pirate_enclave_country = {
+						create_fleet = {
+    						name = "Mêlée Station"
+							settings = { spawn_debris = no }
+							effect = {
+								set_owner = prev
+								create_ship = {
+									name = random
+									design = "Artist Enclave Station"
+									graphical_culture = prev
+									#effect = {
+									#	save_event_target_as = station_location
+									#}
+								}
+								set_location = {
+									target = prevprev
+									distance = 90
+								}
+								set_fleet_flag = pirate_enclave_station
+							}
+						}
+						create_leader = {
+							type = ruler
+							species = prev
+							name = random
+							skill = 2000
+						}
+						set_leader = last_created_leader
+					}
+				}
+			}
+		}
+	}
+
+	change_orbit = 10
+
+	planet = {
+		orbit_distance = 20
+		class = pc_molten
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+	}
+
+	planet = {
+		orbit_distance = 40
+		class = pc_gas_giant
+		orbit_angle = { min = 90 max = 270 }
+		size = 60
+	}
+
+	init_effect = {
+		###
+	}
+}
+
+# PIRATE III
+pirate_enclave_init_02 = {
+	class = random
+	asteroids_distance = { min = 40 max = 60 }
+	usage = misc_system_init
+	usage_odds = {
+        base = 100
+#		base = 0
+#		modifier = {
+#			has_leviathans = yes
+#			add = 100
+#		}
+#		modifier = {
+#			factor = 0
+#			is_fe_cluster = yes
+#		}
+	}
+
+	max_instances = 1
+	#spawn_chance = 100
+	scaled_spawn_chance = 16	# scales by galaxy size (1000 stars = 10x base)
+
+	flags = { pirate_enclave_system pirate_enclave }
+
+	planet = {
+		count = 1
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+	}
+
+	change_orbit = 45
+
+	planet = {
+		count = 1
+		class = pc_barren
+		size = 25
+		orbit_angle = { min = 90 max = 270 }
+	}
+
+	planet = {
+		count = 1
+		orbit_distance = 30
+		class = rl_unhabitable_planets
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+
+		init_effect = {
+			set_planet_flag = pirate_enclave_planet
+			create_species = {
+				name = random
+				class = random
+				portrait = random
+				traits = random
+				homeworld = this
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = event_target:pirate_enclave_country
+					}
+				}
+				create_country = {
+					name = "Pirate Band"
+					type = enclave
+					authority = "auth_democratic"
+					civics = {
+						civic = civic_pe_pirate_collective
+					}
+					species = last_created
+					flag = {
+						icon = {
+							category = "enclaves"
+							file = "enclaves_flag_artist.dds"
+						}
+						background = {
+							category = "backgrounds"
+							file = "vertical.dds"
+						}
+						colors = {
+							"dark_purple"
+							"purple"
+							"null"
+							"null"
+						}
+					}
+					ethos = {
+						ethic = ethic_fanatic_militarist
+						ethic = ethic_materialist
+					}
+					ignore_initial_colony_error = yes
+				}
+				last_created_country = {
+					save_global_event_target_as = pirate_enclave_country
+					set_country_flag = pirate_enclave_country
+					set_graphical_culture = mammalian_01
+					create_fleet = {
+						name = "Mêlée Station"
+						settings = { spawn_debris = no }
+						effect = {
+							set_owner = prev
+							create_ship = {
+								name = random
+								design = "Artist Enclave Station"
+								graphical_culture = prev
+							}
+							set_location = {
+								target = prevprev
+								distance = 90
+							}
+							save_event_target_as = CustomCapital
+							prev = {
+								set_custom_capital_location = event_target:CustomCapital
+							}
+						}
+					}
+					create_leader = {
+						type = ruler
+						species = prev
+						name = random
+						skill = 2000
+					}
+					set_leader = last_created_leader
+				}
+				else = {
+					event_target:pirate_enclave_country = {
+						create_fleet = {
+    						name = "Mêlée Station"
+							settings = { spawn_debris = no }
+							effect = {
+								set_owner = prev
+								create_ship = {
+									name = random
+									design = "Artist Enclave Station"
+									graphical_culture = prev
+									#effect = {
+									#	save_event_target_as = station_location
+									#}
+								}
+								set_location = {
+									target = prevprev
+									distance = 90
+								}
+								set_fleet_flag = pirate_enclave_station
+							}
+						}
+						create_leader = {
+							type = ruler
+							species = prev
+							name = random
+							skill = 2000
+						}
+						set_leader = last_created_leader
+					}
+				}
+			}
+		}
+	}
+
+	change_orbit = 10
+
+	planet = {
+		orbit_distance = 20
+		class = pc_molten
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+	}
+
+	planet = {
+		orbit_distance = 40
+		class = pc_gas_giant
+		orbit_angle = { min = 90 max = 270 }
+		size = 60
+	}
+
+	init_effect = {
+		###
+	}
+}
+
+# Pirates III
+pirate_enclave_init_03 = {
+	class = random
+	asteroids_distance = { min = 40 max = 60 }
+	usage = misc_system_init
+	usage_odds = {
+        base = 100
+#		base = 0
+#		modifier = {
+#			has_leviathans = yes
+#			add = 100
+#		}
+#		modifier = {
+#			factor = 0
+#			is_fe_cluster = yes
+#		}
+	}
+
+	max_instances = 1
+	scaled_spawn_chance = 12	# scales by galaxy size (1000 stars = 10x base)
+
+	flags = { pirate_enclave_system pirate_enclave }
+
+	planet = {
+		count = 1
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+	}
+
+	change_orbit = 45
+
+	planet = {
+		count = 1
+		class = pc_barren
+		size = 25
+		orbit_angle = { min = 90 max = 270 }
+	}
+
+	planet = {
+		count = 1
+		orbit_distance = 30
+		class = rl_unhabitable_planets
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+
+		init_effect = {
+			set_planet_flag = pirate_enclave_planet
+			create_species = {
+				name = random
+				class = random
+				portrait = random
+				traits = random
+				homeworld = this
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = event_target:pirate_enclave_country
+					}
+				}
+				create_country = {
+					name = "Pirate Band"
+					type = enclave
+					authority = "auth_democratic"
+					civics = {
+						civic = civic_pe_pirate_collective
+					}
+					species = last_created
+					flag = {
+						icon = {
+							category = "enclaves"
+							file = "enclaves_flag_artist.dds"
+						}
+						background = {
+							category = "backgrounds"
+							file = "vertical.dds"
+						}
+						colors = {
+							"dark_purple"
+							"purple"
+							"null"
+							"null"
+						}
+					}
+					ethos = {
+						ethic = ethic_fanatic_militarist
+						ethic = ethic_materialist
+					}
+					ignore_initial_colony_error = yes
+				}
+				last_created_country = {
+					save_global_event_target_as = pirate_enclave_country
+					set_country_flag = pirate_enclave_country
+					set_graphical_culture = mammalian_01
+					create_fleet = {
+						name = "Mêlée Station"
+						settings = { spawn_debris = no }
+						effect = {
+							set_owner = prev
+							create_ship = {
+								name = random
+								design = "Artist Enclave Station"
+								graphical_culture = prev
+							}
+							set_location = {
+								target = prevprev
+								distance = 90
+							}
+							save_event_target_as = CustomCapital
+							prev = {
+								set_custom_capital_location = event_target:CustomCapital
+							}
+						}
+					}
+					create_leader = {
+						type = ruler
+						species = prev
+						name = random
+						skill = 2000
+					}
+					set_leader = last_created_leader
+				}
+				else = {
+					event_target:pirate_enclave_country = {
+						create_fleet = {
+    						name = "Mêlée Station"
+							settings = { spawn_debris = no }
+							effect = {
+								set_owner = prev
+								create_ship = {
+									name = random
+									design = "Artist Enclave Station"
+									graphical_culture = prev
+									#effect = {
+									#	save_event_target_as = station_location
+									#}
+								}
+								set_location = {
+									target = prevprev
+									distance = 90
+								}
+								set_fleet_flag = pirate_enclave_station
+							}
+						}
+						create_leader = {
+							type = ruler
+							species = prev
+							name = random
+							skill = 2000
+						}
+						set_leader = last_created_leader
+					}
+				}
+			}
+		}
+	}
+
+	change_orbit = 10
+
+	planet = {
+		orbit_distance = 20
+		class = pc_molten
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+	}
+
+	planet = {
+		orbit_distance = 40
+		class = pc_gas_giant
+		orbit_angle = { min = 90 max = 270 }
+		size = 60
+	}
+
+	init_effect = {
+		###
+	}
+}

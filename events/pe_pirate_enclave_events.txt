@@ -1,0 +1,437 @@
+#################################
+### Pirate Enclave Events     ###
+### by Me               	  ###
+#################################
+
+namespace = pe_pirate
+
+@tier1influencecontact = 7
+@tier1influencecontactxenophile = 8
+@tier1influencecontactmin = 20
+@tier1influencecontactmax = 80
+
+@tier2influencecontact = 10
+@tier2influencecontactxenophile = 12
+@tier2influencecontactmin = 40
+@tier2influencecontactmax = 100
+
+
+fleet_event = {
+	id = pe_pirate.0
+	title = "action.10.name"
+	desc = "action.15.desc"
+	picture = GFX_evt_star_chart
+	location = FROM
+
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			is_country_type = default
+			exists = capital_scope
+		}
+		from = {
+			has_star_flag = pirate_enclave
+			any_ship_in_system = {
+				exists = owner
+				owner = {
+					is_country_type = enclave
+					NOR = {
+						has_communications = root.owner
+						reverse_has_relation_flag = {
+							flag = ongoing_pirate_enclave_investigation
+							who = root.owner
+						}
+					}
+				}
+			}
+		}
+	}
+
+	immediate = {
+		owner = {
+			capital_scope = { save_event_target_as = pc_home }
+			from = {
+				random_fleet_in_system = {
+					limit = {
+						exists = owner
+						owner = { is_country_type = enclave }
+					}
+					owner = {
+						save_event_target_as = target_enclave
+						country_event = { id = pe_pirate.1 days = 300 random = 50 }
+						enable_special_project = {
+							name = "INVESTIGATE_PIRATE_ENCLAVE"
+							location = event_target:pc_home
+							owner = root.owner
+						}
+					}
+				}
+			}
+			set_relation_flag = {
+				flag = ongoing_pirate_enclave_investigation
+				who = event_target:target_enclave
+			}
+		}
+	}
+
+	option = {
+		name = "action.10.a"
+		owner = {
+			tooltip = {
+				enable_special_project = {
+					name = "INVESTIGATE_PIRATE_ENCLAVE"
+					location = event_target:pc_home
+					owner = ROOT
+				}
+			}
+		}
+	}
+}
+
+# Pirate enclaves make contact after 300 days
+country_event = {
+	id = pe_pirate.1
+	hide_window = yes
+
+	trigger = {
+		exists = event_target:pc_home
+		event_target:pc_home = {
+			exists = owner
+			owner = {
+				NOT = { has_communications = root }
+				has_relation_flag = {
+					flag = ongoing_pirate_enclave_investigation
+					who = root
+				}
+			}
+		}
+	}
+
+	immediate = {
+		event_target:pc_home = {
+			if = {
+				limit = {
+					exists = owner
+					owner = {
+						NOT = {
+							has_communications = root
+						}
+						has_relation_flag = {
+							flag = ongoing_pirate_enclave_investigation
+							who = root
+						}
+					}
+				}
+				owner = {
+					root = { establish_communications_no_message = prev }
+					country_event = { id = pe_pirate.2 }
+				}
+			}
+		}
+	}
+}
+
+# Enclave Establishes Communications
+country_event = {
+	id = pe_pirate.2
+	title = guardian.98.name
+	desc = guardian.98.desc
+	picture = GFX_evt_throne_room
+	show_sound = event_radio_chatter
+
+	is_triggered_only = yes
+
+	after = {
+		if = {
+			add_monthly_resource_mult = {
+				resource = influence
+                value = @tier2influencecontact
+                min = @tier2influencecontactmin
+                max = @tier2influencecontactmax
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { from = { has_country_flag = pirate_enclave_country } }
+				from = { country_event = { id = pe_pirate.4 } }
+				break = yes
+			}
+		}
+	}
+
+	option = {
+		name = SCUM
+		trigger = {
+			has_civic = civic_fanatic_purifiers
+		}
+	}
+
+	option = {
+		name = guardian.98.a
+		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
+	}
+}
+
+# Communication Established
+country_event = {
+	id = pe_pirate.3
+	title = "guardian.99.name"
+	desc = guardian.99.desc
+	picture = GFX_evt_throne_room
+	show_sound = event_radio_chatter
+
+	is_triggered_only = yes
+
+	immediate = { establish_communications_no_message = FROMFROM }
+
+	after = {
+		if = {
+			add_monthly_resource_mult = {
+				resource = influence
+                value = @tier2influencecontact
+                min = @tier2influencecontactmin
+                max = @tier2influencecontactmax
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					fromfrom = {
+						has_country_flag = pirate_enclave_country
+					}
+				}
+				fromfrom = {
+					country_event = { id = pe_pirate.4 }
+				}
+				set_country_flag = enclave_pirate_encountered
+				break = yes
+			}
+		}
+	}
+
+	option = {
+		name = SCUM
+		trigger = {
+			has_civic = civic_fanatic_purifiers
+		}
+	}
+
+	option = {
+		name = "guardian.98.a"
+		trigger = {
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+	}
+}
+
+country_event = {
+	id = pe_pirate.4
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		from = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = enclave_pirate_ignores }
+				}
+				country_event = { id = pe_pirate.5 }
+				else = {
+					country_event = { id = pe_pirate.7 }
+				}
+			}
+		}
+	}
+}
+
+# Pirate Introduction
+country_event = {
+	id = pe_pirate.5
+	title = guardian.300.name
+	desc = guardian.300.desc
+
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_trader_window"
+
+	picture_event_data = {
+		portrait = from
+		room = enclave_artist_room
+	}
+
+	option = {
+		name = INTERESTING
+		custom_gui = "enclave_artist_option"
+		trigger = {
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+	}
+
+	option = {
+		name = SCUM
+		custom_gui = "enclave_artist_option"
+		trigger = {
+			has_civic = civic_fanatic_purifiers
+		}
+	}
+}
+
+# Pirate Enclave Main Window
+country_event = {
+	id = pe_pirate.6
+	title = guardian.300.name
+	desc = {
+		trigger = {
+			switch = {
+				trigger = has_country_flag
+				pirate_enclave_diplomacy_continued = { text = guardian.300.desc.continued }
+				recently_purchased_art = { text = guardian.302.a.reply }
+				recently_purchased_patron = { text = guardian.304.a.reply }
+				recently_purchased_festival = { text = guardian.303.a.reply }
+				default = { text = guardian.300.desc }
+			}
+		}
+	}
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = event_target:pirate_enclave
+		room = enclave_artist_room
+	}
+
+	trigger = {
+		from = {
+			is_country_type = enclave
+			has_country_flag = pirate_enclave_country
+		}
+		OR = {
+			OR = {
+				has_country_flag = pirate_enclave_diplomacy_continued
+				NOT = { has_country_flag = pirate_enclave_diplomacy_engaged }
+			}
+			has_country_flag = recently_purchased_art
+			has_country_flag = recently_purchased_patron
+			has_country_flag = recently_purchased_festival
+		}
+		NOT = {	has_country_flag = enclave_pirate_ignores }
+	}
+
+	immediate = {
+		save_event_target_as = my_country
+		set_country_flag = pirate_enclave_diplomacy_engaged
+		if = {
+			limit = {
+				NOT = { exists = event_target:pirate_enclave }
+			}
+			from = {
+				save_event_target_as = pirate_enclave
+			}
+		}
+	}
+
+	option = {
+		name = guardian.300.d
+		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
+		is_dialog_only = yes
+		response_text = guardian.300.d.reply
+	}
+	option = {
+		name = GOODBYE
+		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
+		default_hide_option = yes
+		hidden_effect = {
+			remove_country_flag = pirate_enclave_diplomacy_engaged
+			remove_country_flag = pirate_enclave_diplomacy_continued
+		}
+	}
+
+	option = {
+		name = SCUM
+		trigger = { has_civic = civic_fanatic_purifiers }
+	}
+
+	after = {
+		hidden_effect = {
+			remove_country_flag = pirate_enclave_diplomacy_engaged
+			remove_country_flag = pirate_enclave_diplomacy_continued
+			remove_country_flag = recently_purchased_art
+			remove_country_flag = recently_purchased_patron
+			remove_country_flag = recently_purchased_festival
+		}
+	}
+}
+
+
+#Pirates don't answer your calls after being attacked
+country_event = {
+	id = pe_pirate.7
+	title = guardian.300.name
+	desc = guardian.313.desc
+	desc = {
+		trigger = {
+			switch = {
+				trigger = has_country_flag
+				enclave_pirate_encountered = { text = guardian.313.desc }
+				default = { text = guardian.313.desc.unknown }
+			}
+		}
+	}
+	picture = GFX_evt_space_station
+	show_sound = event_radio_chatter
+	location = event_target:location
+
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			AND = {
+				is_country_type = enclave
+				has_country_flag = pirate_enclave_country
+			}
+		}
+		has_country_flag = enclave_pirate_ignores
+		NOT = {
+			has_country_flag = pirate_enclave_diplomacy_engaged
+		}
+	}
+
+	immediate = {
+		random_planet = {
+			limit = {
+				has_planet_flag = pirate_enclave_planet
+			}
+			save_event_target_as = location
+		}
+		set_country_flag = pirate_enclave_diplomacy_engaged
+	}
+
+	option = {
+		name = SCUM
+		trigger = { has_civic = civic_fanatic_purifiers }
+	}
+
+	option = {
+		name = guardian.313.a
+		default_hide_option = yes
+		trigger = {
+			has_country_flag = enclave_pirate_encountered
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		hidden_effect = {
+			remove_country_flag = pirate_enclave_diplomacy_engaged
+		}
+	}
+	option = {
+		name = PECULIAR
+		trigger = {
+			NOT = { has_country_flag = enclave_pirate_encountered }
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		hidden_effect = {
+			remove_country_flag = pirate_enclave_diplomacy_engaged
+		}
+	}
+}
