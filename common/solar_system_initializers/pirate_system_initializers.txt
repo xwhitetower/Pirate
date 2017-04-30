@@ -77,16 +77,16 @@ pirate_enclave_init_01 = {
 					species = last_created
 					flag = {
 						icon = {
-							category = "enclaves"
-							file = "enclaves_flag_artist.dds"
+							category = "pirate"
+							file = "flag_pirate_5.dds"
 						}
 						background = {
 							category = "backgrounds"
 							file = "vertical.dds"
 						}
 						colors = {
-							"dark_purple"
-							"purple"
+							"black"
+							"black"
 							"null"
 							"null"
 						}
@@ -259,16 +259,16 @@ pirate_enclave_init_02 = {
 					species = last_created
 					flag = {
 						icon = {
-							category = "enclaves"
-							file = "enclaves_flag_artist.dds"
+							category = "pirate"
+							file = "flag_pirate_5.dds"
 						}
 						background = {
 							category = "backgrounds"
 							file = "vertical.dds"
 						}
 						colors = {
-							"dark_purple"
-							"purple"
+							"black"
+							"black"
 							"null"
 							"null"
 						}
@@ -440,16 +440,16 @@ pirate_enclave_init_03 = {
 					species = last_created
 					flag = {
 						icon = {
-							category = "enclaves"
-							file = "enclaves_flag_artist.dds"
+							category = "pirate"
+							file = "flag_pirate_5.dds"
 						}
 						background = {
 							category = "backgrounds"
 							file = "vertical.dds"
 						}
 						colors = {
-							"dark_purple"
-							"purple"
+							"black"
+							"black"
 							"null"
 							"null"
 						}
