@@ -9,7 +9,7 @@ pirate_enclave_init_01 = {
 	asteroids_distance = { min = 40 max = 60 }
 	usage = misc_system_init
 	usage_odds = {
-        base 100
+        base = 100
 #		base = 0
 #		modifier = {
 #			has_leviathans = yes
