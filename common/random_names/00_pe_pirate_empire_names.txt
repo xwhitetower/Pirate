@@ -1,0 +1,23 @@
+##############
+# NAME PARTS #
+##############
+
+empire_name_parts_list = {
+	key = "pe_pirate_names"
+	parts = {
+		"Pirate Enclave" = 10
+	}
+}
+
+empire_name_format = {
+	random_weight = {
+		factor = 0
+		modifier = {
+			add = 100
+			is_country_type = enclave
+			has_government = gov_pe_pirate_enclave
+		}
+	}
+	format = "format.pe_pirate.1"
+	noun = "<pe_pirate_names>"
+}

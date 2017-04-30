@@ -1,6 +1,10 @@
 ﻿l_english:
 
+pe_pirate_government:0 "Pirate Enclave"
+pe_pirate_government_desc:0 "§LAn organized pirate band strong enough to be considered a nation.§!"
 RT_PIRATE_CAPTAIN:0 "Pirate Captain"
+civic_pe_pirate_collective:0 "Pirate Collective"
+civic_pe_pirate_collective_desc:0 ""
 INVESTIGATE_PIRATE_ENCLAVE:0 "$ESTABLISH_COMMUNICATIONS$"
 INVESTIGATE_PIRATE_ENCLAVE:0 "We need to learn more about the mysterious aliens residing in the §Y[Prev.From.GetName] System§!. If they possess a language, we must decipher it and establish communications.\n\nReward: £influence  §GInfluence§! or §SSpecial Project§!"
 
