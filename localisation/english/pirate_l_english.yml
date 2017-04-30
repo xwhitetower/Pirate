@@ -1,0 +1,24 @@
+RT_PIRATE_CAPTAIN:0 "Pirate Captain"
+INVESTIGATE_PIRATE_ENCLAVE:0 "$ESTABLISH_COMMUNICATIONS$"
+INVESTIGATE_PIRATE_ENCLAVE:0 "We need to learn more about the mysterious aliens residing in the §Y[Prev.From.GetName] System§!. If they possess a language, we must decipher it and establish communications.\n\nReward: £influence  §GInfluence§! or §SSpecial Project§!"
+
+# CONTACT EVENTS - do not use the guardian.XX in case paradox changes something
+pe_pirate.2.name:0 "Communications Established"
+pe_pirate.2.desc:1 "We are receiving a transmission from the independent space station of the §Y[From.GetName]§!! They appear to have successfully translated our language."
+pe_pirate.2.a:0 "Interesting."
+
+pe_pirate.3.name:0 "Communications Established"
+pe_pirate.3.desc:1 "After successfully translating their language, we have established communications with the independent space station of the §Y[From.From.GetName]§!."
+
+# Pirate Main Window
+pe_pirate.5.name:0 "The Pirate Band"
+pe_pirate.5.desc:0 "Greetings, [my_country.GetRulerName]. I, [pe_pirate_enclave.GetRulerName], Captain of this crew, greet you.\n\nAre you here for a game of Damage? Or maybe just to enjoy some Grog?"
+pe_pirate.5.desc.continued:0 "Very well. Then is there anything else we can do for you?"
+pe_pirate.5.d:0 "Tell us more about your band."
+pe_pirate.5.d.reply:0 "We are the Pirate Band. The crew consist of individual seeking freedom, we do not believe that any government can tell us what we can or can not do.\n\nHaving said that, if you prove to be trusthworthy, we might consider to establish a partnership with you."
+pe_pirate.5.e:0 "What else can you do?"
+
+# Ofended pirates do not respond
+pe_pirate.7.desc:0 "The Pirate Band refuse to respond to our hails."
+pe_pirate.7.desc.unknown:1 "Translations aside, once we exchanged our information with [From.GetName] they closed down all channels and refused to speak to us."
+pe_pirate.7.a:0 "How dare they?!"

@@ -135,8 +135,8 @@ country_event = {
 # Enclave Establishes Communications
 country_event = {
 	id = pe_pirate.2
-	title = guardian.98.name
-	desc = guardian.98.desc
+	title = pe_pirate.2.name
+	desc = pe_pirate.2.desc
 	picture = GFX_evt_throne_room
 	show_sound = event_radio_chatter
 
@@ -168,7 +168,7 @@ country_event = {
 	}
 
 	option = {
-		name = guardian.98.a
+		name = pe_pirate.2.a
 		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
 	}
 }
@@ -176,8 +176,8 @@ country_event = {
 # Communication Established
 country_event = {
 	id = pe_pirate.3
-	title = "guardian.99.name"
-	desc = guardian.99.desc
+	title = "pe_pirate.3.name"
+	desc = pe_pirate.3.desc
 	picture = GFX_evt_throne_room
 	show_sound = event_radio_chatter
 
@@ -218,7 +218,7 @@ country_event = {
 	}
 
 	option = {
-		name = "guardian.98.a"
+		name = "pe_pirate.2.a"
 		trigger = {
 			NOT = { has_civic = civic_fanatic_purifiers }
 		}
@@ -247,8 +247,8 @@ country_event = {
 # Pirate Introduction
 country_event = {
 	id = pe_pirate.5
-	title = guardian.300.name
-	desc = guardian.300.desc
+	title = pe_pirate.5.name
+	desc = pe_pirate.5.desc
 
 	is_triggered_only = yes
 	diplomatic = yes
@@ -279,16 +279,13 @@ country_event = {
 # Pirate Enclave Main Window
 country_event = {
 	id = pe_pirate.6
-	title = guardian.300.name
+	title = pe_pirate.5.name
 	desc = {
 		trigger = {
 			switch = {
 				trigger = has_country_flag
-				pirate_enclave_diplomacy_continued = { text = guardian.300.desc.continued }
-				recently_purchased_art = { text = guardian.302.a.reply }
-				recently_purchased_patron = { text = guardian.304.a.reply }
-				recently_purchased_festival = { text = guardian.303.a.reply }
-				default = { text = guardian.300.desc }
+				pirate_enclave_diplomacy_continued = { text = pe_pirate.5.desc.continued }
+				default = { text = pe_pirate.5.desc }
 			}
 		}
 	}
@@ -333,10 +330,10 @@ country_event = {
 	}
 
 	option = {
-		name = guardian.300.d
+		name = pe_pirate.5.d
 		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
 		is_dialog_only = yes
-		response_text = guardian.300.d.reply
+		response_text = pe_pirate.5.d.reply
 	}
 	option = {
 		name = GOODBYE
@@ -368,14 +365,14 @@ country_event = {
 #Pirates don't answer your calls after being attacked
 country_event = {
 	id = pe_pirate.7
-	title = guardian.300.name
-	desc = guardian.313.desc
+	title = pe_pirate.5.name
+	desc = pe_pirate.7.desc
 	desc = {
 		trigger = {
 			switch = {
 				trigger = has_country_flag
-				enclave_pirate_encountered = { text = guardian.313.desc }
-				default = { text = guardian.313.desc.unknown }
+				enclave_pirate_encountered = { text = pe_pirate.7.desc }
+				default = { text = pe_pirate.7.desc.unknown }
 			}
 		}
 	}
@@ -414,7 +411,7 @@ country_event = {
 	}
 
 	option = {
-		name = guardian.313.a
+		name = pe_pirate.7.a
 		default_hide_option = yes
 		trigger = {
 			has_country_flag = enclave_pirate_encountered
