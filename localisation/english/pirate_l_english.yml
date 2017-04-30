@@ -1,3 +1,5 @@
+﻿l_english:
+
 RT_PIRATE_CAPTAIN:0 "Pirate Captain"
 INVESTIGATE_PIRATE_ENCLAVE:0 "$ESTABLISH_COMMUNICATIONS$"
 INVESTIGATE_PIRATE_ENCLAVE:0 "We need to learn more about the mysterious aliens residing in the §Y[Prev.From.GetName] System§!. If they possess a language, we must decipher it and establish communications.\n\nReward: £influence  §GInfluence§! or §SSpecial Project§!"
