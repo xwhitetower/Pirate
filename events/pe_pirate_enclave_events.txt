@@ -284,8 +284,8 @@ country_event = {
 		trigger = {
 			switch = {
 				trigger = has_country_flag
-				pirate_enclave_diplomacy_continued = { text = pe_pirate.5.desc.continued }
-				default = { text = pe_pirate.5.desc }
+				pirate_enclave_diplomacy_continued = { text = pe_pirate.6.desc.continued }
+				default = { text = pe_pirate.6.desc }
 			}
 		}
 	}
@@ -330,10 +330,10 @@ country_event = {
 	}
 
 	option = {
-		name = pe_pirate.5.d
+		name = pe_pirate.6.d
 		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
 		is_dialog_only = yes
-		response_text = pe_pirate.5.d.reply
+		response_text = pe_pirate.6.d.reply
 	}
 	option = {
 		name = GOODBYE
