@@ -8,6 +8,9 @@ civic_pe_pirate_collective_desc:0 ""
 leader_trait_pe_pirate_admiral:0 "Pirate"
 leader_trait_pe_pirate_admiral_desc:0 "This leader hails from the Pirate enclave. His understanding of raiding and combat is unmatched. Unfortunately he demands part of the spoils of war, increasing our fleet maintenance costs."  
 
+pe_pirate_enclave_size:0 "Pirate Enclave Station"
+pe_pirate_enclave_size_plural:0 "Pirate Enclave Stations"
+
 INVESTIGATE_PIRATE_ENCLAVE:0 "$ESTABLISH_COMMUNICATIONS$"
 INVESTIGATE_PIRATE_ENCLAVE_DESC:0 "We need to learn more about the mysterious aliens residing in the §Y[Prev.From.GetName] System§!. If they possess a language, we must decipher it and establish communications.\n\nReward: £influence  §GInfluence§! or §SSpecial Project§!"
 
