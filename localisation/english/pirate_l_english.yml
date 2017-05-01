@@ -5,6 +5,9 @@ gov_pe_pirate_enclave_desc:0 "§LAn organized pirate band.§!"
 RT_PIRATE_CAPTAIN:0 "Pirate Captain"
 civic_pe_pirate_collective:0 "Pirate Collective"
 civic_pe_pirate_collective_desc:0 ""
+leader_trait_pe_pirate_admiral:0 "Pirate"
+leader_trait_pe_pirate_admiral_desc:0 "This leader hails from the Pirate enclave. His understanding of raiding and combat is unmatched. Unfortunately he demands part of the spoils of war, increasing our fleet maintenance costs."  
+
 INVESTIGATE_PIRATE_ENCLAVE:0 "$ESTABLISH_COMMUNICATIONS$"
 INVESTIGATE_PIRATE_ENCLAVE_DESC:0 "We need to learn more about the mysterious aliens residing in the §Y[Prev.From.GetName] System§!. If they possess a language, we must decipher it and establish communications.\n\nReward: £influence  §GInfluence§! or §SSpecial Project§!"
 
@@ -24,6 +27,9 @@ pe_pirate.mainwindow.desc.continued:0 "Very well. Then is there anything else we
 pe_pirate.mainwindow.opt.gamble:0 "I am here to play cards."
 pe_pirate.mainwindow.opt.info:0 "Tell us more about your band."
 pe_pirate.mainwindow.reply.info:0 "We are the Pirate Band. The crew consist of individual seeking freedom, we do not believe that any government can tell us what we can or can not do.\n\nHaving said that, if you prove to be trusthworthy, we might consider to establish a partnership with you."
+pe_pirate.mainwindow.opt.hire:0 "I would like to hire one of your men."
+pe_pirate.mainwindow.tooltip.hire.fail:0 "Requires the §YPirates§! to have:\n£opinion  Opinion +50"
+pe_pirate.mainwindow.tooltip.hire.alreadyrecruited:0 "We already employ a Pirate admiral."
 
 # Ofended pirates do not respond
 pe_pirate.ignorewindow.desc:0 "The Pirate Band refuse to respond to our hails."
@@ -41,3 +47,10 @@ pe_pirate.ignorewindow.desc.mineralwinner:0 "Damnation. You won. Here is your re
 pe_pirate.ignorewindow.desc.energyloser:0 "Hahaha! Your energy is mine now!"
 pe_pirate.ignorewindow.desc.energywinner:0 "Here, take it. Is not like energy matters at all."
 pe_pirate.gambleresultswindow.desc:0 "If this text appears. Congratulations, you found a bug."
+
+# Hiring pirate admirals
+pe_pirate.hirewindow.desc:0 "We are willing to pledge the services of one of our most brilliant captains to your cause. This is not an offer we make to just anyone, you understand!\n\nA suitable... donation will of course be necessary, before traveling arrangements can be made."
+pe_pirate.hirewindow.opt.hire:0 "Of course. You shall have your donation."
+pe_pirate.hirewindow.reply.hire:0 "Excellent. Have fun pillagin!"
+pe_pirate.hirewindow.opt.goback:0 "What else did you have to offer?"
+pe_pirate.hirewindow.opt.byebye:0 "Goodbye."

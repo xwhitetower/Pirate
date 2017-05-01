@@ -335,6 +335,33 @@ country_event = {
 	}
 
 	option = {
+		name = pe_pirate.mainwindow.opt.hire
+		trigger = {
+            NOT = { has_civic = civic_fanatic_purifiers }
+        }
+		allow = {
+			custom_tooltip = {
+				fail_text = pe_pirate.mainwindow.tooltip.hire.fail
+				event_target:pirate_enclave = {
+					trust = {
+						who = root
+						value > 49
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = pe_pirate.mainwindow.tooltip.hire.alreadyrecruited
+				NOT = {
+					any_owned_leader = { has_trait = leader_trait_pe_pirate_admiral }
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = pe_pirate.10 }
+		}
+	}
+
+	option = {
 		name = pe_pirate.mainwindow.opt.info
 		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
 		is_dialog_only = yes
@@ -454,6 +481,10 @@ country_event = {
 		has_country_flag = pirate_enclave_diplomacy_engaged
 	}
 
+	immediate = {
+		remove_country_flag = pirate_enclave_diplomacy_engaged
+    }
+
 	option = {
 		name = pe_pirate.gamblewindow.opt.minealwager
 		add_minerals = -500
@@ -552,6 +583,10 @@ country_event = {
         }
 	}
 
+	immediate = {
+        set_country_flag = pirate_enclave_diplomacy_continued
+    }
+
 	option = {
 		name = GAMBLINGLOSER
         trigger = {
@@ -585,8 +620,141 @@ country_event = {
             remove_country_flag = recently_gambled_with_pirates_and_lost_energy
             remove_country_flag = recently_gambled_with_pirates_and_won_minerals
             remove_country_flag = recently_gambled_with_pirates_and_won_energy
-            set_country_flag = pirate_enclave_diplomacy_continued
             country_event = { id = pe_pirate.6 }
         }
     }
+}
+
+# Hire Pirate Admiral menu
+country_event = {
+	id = pe_pirate.10
+	title = pe_pirate.diplo.title
+	desc = pe_pirate.hirewindow.desc
+
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = event_target:pirate_enclave
+		room = enclave_artist_room
+	}
+
+	trigger = {
+		has_country_flag = pirate_enclave_diplomacy_engaged
+	}
+
+	immediate = {
+		remove_country_flag = pirate_enclave_diplomacy_engaged
+        set_country_flag = pirate_enclave_diplomacy_continued
+		event_target:pirate_enclave = {
+			owner_species = { save_event_target_as = pirate_species }
+		}
+	}
+
+	option = {
+		name = pe_pirate.hirewindow.opt.hire
+		response_text = pe_pirate.hirewindow.reply.hire
+		allow = {
+			energy > 2500
+			free_leader_slots > 0
+			hidden_trigger = {
+				NOT = { has_country_flag = attacked_pe_pirates }
+			}
+		}
+		add_energy = -2500
+		custom_tooltip = opinion20
+		hidden_effect = {
+			set_country_flag = pe_pirate_admiral_recruited
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = 20
+				}
+			}
+			random_list = {
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Long J. Gold"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 41
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Three eyed Willie"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 45
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Black Heart"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 43
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Bloody Nyx"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 47
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Threepwood the Bloodless"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 42
+					}
+				}
+			}
+		}
+	}
+	option = { # Back
+		name = pe_pirate.hirewindow.opt.goback
+		hidden_effect = {
+			country_event = { id = pe_pirate.6 }
+		}
+	}
+	option = { # Sign Off
+		name = pe_pirate.hirewindow.opt.byebye
+		default_hide_option = yes
+	}
 }
