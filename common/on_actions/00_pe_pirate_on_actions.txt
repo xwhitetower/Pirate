@@ -16,3 +16,12 @@ on_entering_system_fleet = {
 		pe_pirate.0
 	}
 }
+
+# Executed as a leader has died
+# This = Country
+# From = Leader
+on_leader_death = {
+	events = {
+		pe_pirate.12
+	}
+}

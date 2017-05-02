@@ -693,7 +693,11 @@ country_event = {
 		}
 		add_energy = -2500
 		custom_tooltip = opinion20
+        custom_tooltip = pe_pirate.hirewindow.tooltip.hire.warning
 		hidden_effect = {
+            every_country = {
+                add_opinion_modifier = { who = root modifier = opinion_hired_pirate_admiral }
+            }
 			set_country_flag = pe_pirate_admiral_recruited
 			event_target:pirate_enclave = {
 				add_trust = {
@@ -785,4 +789,27 @@ country_event = {
 		name = pe_pirate.hirewindow.opt.byebye
 		default_hide_option = yes
 	}
+}
+
+# Clean hired pirate admiral opinion malus when the pirate admiral dies. So countries think you are a good boy again.
+country_event = {
+	id = pe_pirate.12
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+        FROM = {
+            has_trait = "leader_trait_pe_pirate_admiral"
+        }
+    }
+
+    immediate = {
+        every_country = {
+            limit = {
+                NOT = {has_country_flag = pe_pirate_admiral_recruited}
+            }
+            remove_opinion_modifier = { who = root modifier = opinion_hired_pirate_admiral }
+        }
+        remove_country_flag = pe_pirate_admiral_recruited
+    }
 }

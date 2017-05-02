@@ -5,6 +5,8 @@ gov_pe_pirate_enclave_desc:0 "§LAn organized pirate band.§!"
 RT_PIRATE_CAPTAIN:0 "Pirate Captain"
 civic_pe_pirate_collective:0 "Pirate Collective"
 civic_pe_pirate_collective_desc:0 ""
+
+opinion_hired_pirate_admiral:0 "Employs pirates in their fleet"
 leader_trait_pe_pirate_admiral:0 "Pirate"
 leader_trait_pe_pirate_admiral_desc:0 "This leader hails from the Pirate enclave. His understanding of raiding and combat is unmatched. Unfortunately he demands part of the spoils of war, increasing our fleet maintenance costs."  
 
@@ -57,3 +59,4 @@ pe_pirate.hirewindow.opt.hire:0 "Of course. You shall have your donation."
 pe_pirate.hirewindow.reply.hire:0 "Excellent. Have fun pillagin!"
 pe_pirate.hirewindow.opt.goback:0 "What else did you have to offer?"
 pe_pirate.hirewindow.opt.byebye:0 "Goodbye."
+pe_pirate.hirewindow.tooltip.hire.warning:0 "Hiring pirates might displease other countries."

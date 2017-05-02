@@ -1,0 +1,17 @@
+#########################################################################
+# OPINION MODIFIERS
+##########################################################################
+
+opinion_hired_pirate_admiral = {
+	opinion = {
+		base = -10
+
+		modifier = {
+			factor = 0
+			OR = {
+                has_country_flag = pirate_enclave_country
+                has_country_flag = pe_pirate_admiral_recruited
+            }
+		}
+	}
+}
