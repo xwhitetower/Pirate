@@ -388,6 +388,72 @@ country_event = {
 			country_event = { id = pe_pirate.11 }
 		}
 	}
+	option = {
+		name = pe_pirate.mainwindow.opt.finance
+		trigger = {
+			NOT = { has_country_flag = pe_pirate_finances_pirates }
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		response_text = pe_pirate.mainwindow.reply.finance
+		custom_tooltip = opinion20
+        custom_tooltip = pe_pirate.hirewindow.tooltip.finance.warning
+		allow = {
+			custom_tooltip = {
+				fail_text = pe_pirate.mainwindow.tooltip.finance.fail
+				event_target:pirate_enclave = {
+					trust = {
+						who = root
+						value > 99
+					}
+				}
+			}
+    		custom_tooltip = {
+    			minerals > 499.99
+    		}
+    		custom_tooltip = {
+    			energy > 999.99
+    		}
+		}
+        add_minerals = -500
+        add_energy = -1000
+		hidden_effect = {
+            set_country_flag = pe_pirate_finances_pirates
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = 20
+				}
+			}
+            every_country = {
+                add_opinion_modifier = { who = root modifier = opinion_finances_pirates }
+            }
+		}
+	}
+
+	option = {
+		name = pe_pirate.mainwindow.opt.stopfinance
+		response_text = pe_pirate.mainwindow.reply.stopfinance
+		trigger = {
+			has_country_flag = pe_pirate_finances_pirates
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		custom_tooltip = opinion-20
+		hidden_effect = {
+			remove_country_flag = pe_pirate_finances_pirates
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = -20
+				}
+			}
+            every_country = {
+                limit = {
+                    NOT = {has_country_flag = opinion_finances_pirates}
+                }
+                remove_opinion_modifier = { who = root modifier = opinion_finances_pirates }
+            }
+		}
+	}
 
 	option = {
 		name = pe_pirate.mainwindow.opt.info
@@ -399,10 +465,6 @@ country_event = {
 		name = GOODBYE
 		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
 		default_hide_option = yes
-		hidden_effect = {
-			remove_country_flag = pirate_enclave_diplomacy_engaged
-			remove_country_flag = pirate_enclave_diplomacy_continued
-		}
 	}
 
 	option = {

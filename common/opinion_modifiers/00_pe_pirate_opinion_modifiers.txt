@@ -11,6 +11,22 @@ opinion_hired_pirate_admiral = {
 			OR = {
                 has_country_flag = pirate_enclave_country
                 has_country_flag = pe_pirate_admiral_recruited
+                has_country_flag = opinion_finances_pirates
+            }
+		}
+	}
+}
+
+opinion_finances_pirates = {
+	opinion = {
+		base = -20
+
+		modifier = {
+			factor = 0
+			OR = {
+                has_country_flag = pirate_enclave_country
+                has_country_flag = pe_pirate_admiral_recruited
+                has_country_flag = opinion_finances_pirates
             }
 		}
 	}

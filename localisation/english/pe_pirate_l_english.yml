@@ -7,6 +7,7 @@ civic_pe_pirate_collective:0 "Pirate Collective"
 civic_pe_pirate_collective_desc:0 ""
 
 opinion_hired_pirate_admiral:0 "Employs pirates in their fleet"
+opinion_finances_pirates:0 "Finances pirates"
 leader_trait_pe_pirate_admiral:0 "Pirate"
 leader_trait_pe_pirate_admiral_desc:0 "This leader hails from the Pirate enclave. His understanding of raiding and combat is unmatched. Unfortunately he demands part of the spoils of war, increasing our fleet maintenance costs."  
 
@@ -35,6 +36,12 @@ pe_pirate.mainwindow.reply.info:0 "We are the Pirate Band. The crew consist of i
 pe_pirate.mainwindow.opt.hire:0 "I would like to hire one of your men."
 pe_pirate.mainwindow.tooltip.hire.fail:0 "Requires the §YPirates§! to have:\n£opinion  Opinion +50"
 pe_pirate.mainwindow.tooltip.hire.alreadyrecruited:0 "We already employ a Pirate admiral."
+pe_pirate.mainwindow.opt.finance:0 "I will support your cause."
+pe_pirate.mainwindow.reply.finance:0 "Good, good. We will raid for you."
+pe_pirate.hirewindow.tooltip.finance.warning:0 "Financing pirates will not please other countries..."
+pe_pirate.mainwindow.tooltip.finance.fail:0 "Requires the §YPirates§! to have:\n£opinion  Opinion +100"
+pe_pirate.mainwindow.opt.stopfinance:0 "I want to stop our partnership."
+pe_pirate.mainwindow.reply.stopfinance:0 "Take my word. You will regret this..."
 
 # Ofended pirates do not respond
 pe_pirate.ignorewindow.desc:0 "The Pirate Band refuse to respond to our hails."
