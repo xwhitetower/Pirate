@@ -2,7 +2,7 @@ ship_section_template = {
 	key = "pe_pirate_enclave_key"
 	ship_size = galleon
 	fits_on_slot = mid
-	entity = "pirate_01_galleon_hull_entity"
+	entity = "pirate_01_pe_pirate_enclave_hull_entity"
 	icon = "GFX_ship_part_core_mid"
 
     component_slot = {
@@ -161,7 +161,7 @@ ship_section_template = {
         slot_type = weapon
         locatorname = "root"
     }
-    
+
     large_utility_slots = 20
     aux_utility_slots = 3
 }
