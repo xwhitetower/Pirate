@@ -311,6 +311,9 @@ pirate_enclave_init_02 = {
 					}
 					set_leader = last_created_leader
 				}
+				last_created_country = {
+                    set_country_flag = pirate_enclave_raiders_country
+                }
 				else = {
 					event_target:pirate_enclave_country = {
 						create_fleet = {

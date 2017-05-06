@@ -1,0 +1,542 @@
+#####################################
+### Pirate Enclave Window Events  ###
+### by Me               	      ###
+#####################################
+
+namespace = pe_pirate_window
+
+# Pirate Introduction
+country_event = {
+	id = pe_pirate_window.0
+	title = pe_pirate.diplo.title
+	desc = pe_pirate.intro.desc
+
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = from
+		room = enclave_artist_room
+	}
+
+	option = {
+		name = INTERESTING
+		trigger = {
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+	}
+
+	option = {
+		name = SCUM
+		trigger = {
+			has_civic = civic_fanatic_purifiers
+		}
+	}
+}
+
+# Pirate Enclave Main Window Entry point
+country_event = {
+	id = pe_pirate_window.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			is_country_type = enclave
+			has_country_flag = pirate_enclave_country
+		}
+		OR = {
+			has_country_flag = pirate_enclave_diplomacy_continued
+			NOT = { has_country_flag = pirate_enclave_diplomacy_engaged }
+		}
+		NOT = {	has_country_flag = enclave_pirate_ignores }
+	}
+
+	immediate = {
+		save_event_target_as = my_country
+		if = {
+			limit = {
+				NOT = { exists = event_target:pirate_enclave }
+			}
+			from = {
+				save_event_target_as = pirate_enclave
+			}
+		}
+        country_event = { id = pe_pirate_window.2 }
+	}
+}
+
+# Pirate Enclave Main Window
+country_event = {
+	id = pe_pirate_window.2
+	title = pe_pirate.diplo.title
+	desc = {
+		trigger = {
+			switch = {
+				trigger = has_country_flag
+				pirate_enclave_diplomacy_continued = { text = pe_pirate.mainwindow.desc.continued }
+				default = { text = pe_pirate.mainwindow.desc }
+			}
+		}
+	}
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = event_target:pirate_enclave
+		room = enclave_artist_room
+	}
+
+	trigger = {
+		OR = {
+			has_country_flag = pirate_enclave_diplomacy_continued
+			NOT = { has_country_flag = pirate_enclave_diplomacy_engaged }
+		}
+		NOT = {	has_country_flag = enclave_pirate_ignores }
+	}
+
+	immediate = {
+		save_event_target_as = my_country
+		set_country_flag = pirate_enclave_diplomacy_engaged
+		if = {
+			limit = {
+				NOT = { exists = event_target:pirate_enclave }
+			}
+			from = {
+				save_event_target_as = pirate_enclave
+			}
+		}
+	}
+
+	option = {
+		name = pe_pirate.mainwindow.opt.gamble
+		trigger = {
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		hidden_effect = {
+			country_event = { id = pe_pirate_window.3 }
+		}
+	}
+
+	option = {
+		name = pe_pirate.mainwindow.opt.hire
+		trigger = {
+            NOT = { has_civic = civic_fanatic_purifiers }
+        }
+		allow = {
+			custom_tooltip = {
+				fail_text = pe_pirate.mainwindow.tooltip.hire.fail
+				event_target:pirate_enclave = {
+					trust = {
+						who = root
+						value > 49
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = pe_pirate.mainwindow.tooltip.hire.alreadyrecruited
+				NOT = {
+					any_owned_leader = { has_trait = leader_trait_pe_pirate_admiral }
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = pe_pirate_window.5 }
+		}
+	}
+	option = {
+		name = pe_pirate.mainwindow.opt.finance
+		trigger = {
+			NOT = { has_country_flag = pe_pirate_finances_pirates }
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		response_text = pe_pirate.mainwindow.reply.finance
+		custom_tooltip = opinion20
+        custom_tooltip = pe_pirate.hirewindow.tooltip.finance.warning
+		allow = {
+			custom_tooltip = {
+				fail_text = pe_pirate.mainwindow.tooltip.finance.fail
+				event_target:pirate_enclave = {
+					trust = {
+						who = root
+						value > 99
+					}
+				}
+			}
+    		custom_tooltip = {
+    			minerals > 499.99
+    		}
+    		custom_tooltip = {
+    			energy > 999.99
+    		}
+		}
+        add_minerals = -500
+        add_energy = -1000
+		hidden_effect = {
+            set_country_flag = pe_pirate_finances_pirates
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = 20
+				}
+			}
+            every_country = {
+                add_opinion_modifier = { who = root modifier = opinion_finances_pirates }
+            }
+		}
+	}
+
+	option = {
+		name = pe_pirate.mainwindow.opt.stopfinance
+		response_text = pe_pirate.mainwindow.reply.stopfinance
+		trigger = {
+			has_country_flag = pe_pirate_finances_pirates
+			NOT = { has_civic = civic_fanatic_purifiers }
+		}
+		custom_tooltip = opinion-20
+		hidden_effect = {
+			remove_country_flag = pe_pirate_finances_pirates
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = -20
+				}
+			}
+            every_country = {
+                limit = {
+                    NOT = {has_country_flag = opinion_finances_pirates}
+                }
+                remove_opinion_modifier = { who = root modifier = opinion_finances_pirates }
+            }
+		}
+	}
+
+	option = {
+		name = pe_pirate.mainwindow.opt.info
+		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
+		is_dialog_only = yes
+		response_text = pe_pirate.mainwindow.reply.info
+	}
+	option = {
+		name = GOODBYE
+		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
+		default_hide_option = yes
+	}
+
+	option = {
+		name = SCUM
+		trigger = { has_civic = civic_fanatic_purifiers }
+	}
+
+	after = {
+		hidden_effect = {
+			remove_country_flag = pirate_enclave_diplomacy_engaged
+			remove_country_flag = pirate_enclave_diplomacy_continued
+		}
+	}
+}
+
+# Gambling at the pirates den
+country_event = {
+	id = pe_pirate_window.3
+	title = pe_pirate.diplo.title
+	desc = pe_pirate.gamblewindow.desc
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = event_target:pirate_enclave
+		room = enclave_artist_room
+	}
+
+	trigger = {
+		has_country_flag = pirate_enclave_diplomacy_engaged
+	}
+
+	immediate = {
+		remove_country_flag = pirate_enclave_diplomacy_engaged
+    }
+
+	option = {
+		name = pe_pirate.gamblewindow.opt.minealwager
+		add_minerals = -500
+		custom_tooltip = opinion5
+		allow = {
+			custom_tooltip = {
+				minerals > 499.99
+			}
+		}
+		hidden_effect = {
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = 5
+				}
+			}
+            random_list = {
+                30 = {
+                    set_country_flag = recently_gambled_with_pirates_and_lost_minerals
+                }
+                70 = {
+                    set_country_flag = recently_gambled_with_pirates_and_won_minerals
+                }
+            }
+    		country_event = { id = pe_pirate_window.4 }
+		}
+	}
+	option = {
+		name = pe_pirate.gamblewindow.opt.energywager
+		add_energy = -1000
+		custom_tooltip = opinion5
+		allow = {
+			custom_tooltip = {
+				energy > 999.99
+			}
+		}
+		hidden_effect = {
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = 5
+				}
+			}
+            random_list = {
+                30 = {
+                    set_country_flag = recently_gambled_with_pirates_and_lost_energy
+                }
+                70 = {
+                    set_country_flag = recently_gambled_with_pirates_and_won_energy
+                }
+            }
+    		country_event = { id = pe_pirate_window.4 }
+    	}
+    }
+	option = {
+		name = NODEAL
+		hidden_effect = {
+            set_country_flag = pirate_enclave_diplomacy_continued
+            country_event = { id = pe_pirate_window.2 }
+		}
+	}
+}
+
+
+country_event = {
+	id = pe_pirate_window.4
+	title = pe_pirate.diplo.title
+	desc = {
+		trigger = {
+			switch = {
+				trigger = has_country_flag
+				recently_gambled_with_pirates_and_lost_minerals = { text = pe_pirate.ignorewindow.desc.mineralloser }
+				recently_gambled_with_pirates_and_won_minerals = { text = pe_pirate.ignorewindow.desc.mineralwinner }
+				recently_gambled_with_pirates_and_lost_energy = { text = pe_pirate.ignorewindow.desc.energyloser }
+				recently_gambled_with_pirates_and_won_energy = { text = pe_pirate.ignorewindow.desc.energywinner }
+				default = { text = pe_pirate.gambleresultswindow.desc }
+			}
+		}
+	}
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = event_target:pirate_enclave
+		room = enclave_artist_room
+	}
+
+	trigger = {
+        OR = {
+            has_country_flag = recently_gambled_with_pirates_and_lost_minerals
+            has_country_flag = recently_gambled_with_pirates_and_won_minerals
+            has_country_flag = recently_gambled_with_pirates_and_lost_energy
+            has_country_flag = recently_gambled_with_pirates_and_won_energy
+        }
+	}
+
+	immediate = {
+        set_country_flag = pirate_enclave_diplomacy_continued
+    }
+
+	option = {
+		name = GAMBLINGLOSER
+        trigger = {
+            has_country_flag = recently_gambled_with_pirates_and_lost_minerals
+        }
+	}
+	option = {
+		name = GAMBLINGLOSER
+        trigger = {
+            has_country_flag = recently_gambled_with_pirates_and_lost_energy
+        }
+	}
+	option = {
+		name = GAMBLINGWINNER
+        trigger = {
+            has_country_flag = recently_gambled_with_pirates_and_won_minerals
+        }
+		add_minerals = 1000
+	}
+	option = {
+		name = GAMBLINGWINNER
+        trigger = {
+            has_country_flag = recently_gambled_with_pirates_and_won_energy
+        }
+		add_energy = 2000
+	}
+
+    after = {
+        hidden_effect = {
+            remove_country_flag = recently_gambled_with_pirates_and_lost_minerals
+            remove_country_flag = recently_gambled_with_pirates_and_lost_energy
+            remove_country_flag = recently_gambled_with_pirates_and_won_minerals
+            remove_country_flag = recently_gambled_with_pirates_and_won_energy
+            country_event = { id = pe_pirate_window.2 }
+        }
+    }
+}
+
+# Hire Pirate Admiral menu
+country_event = {
+	id = pe_pirate_window.5
+	title = pe_pirate.diplo.title
+	desc = pe_pirate.hirewindow.desc
+
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = "enclave_artist_window"
+	custom_gui_option = "enclave_artist_option"
+
+	picture_event_data = {
+		portrait = event_target:pirate_enclave
+		room = enclave_artist_room
+	}
+
+	trigger = {
+		has_country_flag = pirate_enclave_diplomacy_engaged
+	}
+
+	immediate = {
+		remove_country_flag = pirate_enclave_diplomacy_engaged
+        set_country_flag = pirate_enclave_diplomacy_continued
+		event_target:pirate_enclave = {
+			owner_species = { save_event_target_as = pirate_species }
+		}
+	}
+
+	option = {
+		name = pe_pirate.hirewindow.opt.hire
+		response_text = pe_pirate.hirewindow.reply.hire
+		allow = {
+			energy > 2500
+			free_leader_slots > 0
+			hidden_trigger = {
+				NOT = { has_country_flag = attacked_pe_pirates }
+			}
+		}
+		add_energy = -2500
+		custom_tooltip = opinion20
+        custom_tooltip = pe_pirate.hirewindow.tooltip.hire.warning
+		hidden_effect = {
+            every_country = {
+                add_opinion_modifier = { who = root modifier = opinion_hired_pirate_admiral }
+            }
+			set_country_flag = pe_pirate_admiral_recruited
+			event_target:pirate_enclave = {
+				add_trust = {
+					who = root
+					amount = 20
+				}
+			}
+			random_list = {
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Long J. Gold"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 41
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Three eyed Willie"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 45
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Black Heart"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 43
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Bloody Nyx"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 47
+					}
+				}
+				20 = {
+					create_leader = {
+						type = admiral
+						species = event_target:pirate_species
+						name = "Threepwood the Bloodless"
+						skill = 5000
+						traits = {
+							trait = leader_trait_pe_pirate_admiral
+						}
+					}
+					last_created_leader = {
+						set_age = 42
+					}
+				}
+			}
+		}
+	}
+	option = { # Back
+		name = pe_pirate.hirewindow.opt.goback
+		hidden_effect = {
+			country_event = { id = pe_pirate_window.2 }
+		}
+	}
+	option = { # Sign Off
+		name = pe_pirate.hirewindow.opt.byebye
+		default_hide_option = yes
+	}
+}

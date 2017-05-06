@@ -4,7 +4,7 @@
 # From = source country
 on_custom_diplomacy = {
 	events = {
-        pe_pirate.6
+        pe_pirate_window.1
 	}
 }
 
@@ -22,6 +22,6 @@ on_entering_system_fleet = {
 # From = Leader
 on_leader_death = {
 	events = {
-		pe_pirate.12
+		pe_pirate.6
 	}
 }
