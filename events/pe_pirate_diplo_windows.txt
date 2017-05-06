@@ -221,6 +221,12 @@ country_event = {
 		is_dialog_only = yes
 		response_text = pe_pirate.mainwindow.reply.info
 	}
+
+	option = {
+		name = pe_pirate.mainwindow.opt.debugraid
+		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
+		hidden_effect = {country_event = { id = pe_pirate.7}}
+	}
 	option = {
 		name = GOODBYE
 		trigger = { NOT = { has_civic = civic_fanatic_purifiers } }
