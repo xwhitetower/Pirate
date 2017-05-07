@@ -34,5 +34,6 @@ on_leader_death = {
 on_fleet_destroyed_victim = {
 	events = {
         pe_pirate.8
+        pe_pirate.9
 	}
 }

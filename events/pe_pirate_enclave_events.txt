@@ -359,6 +359,7 @@ country_event = {
                     has_country_flag = pe_pirate_finances_pirates
                 }
             }
+            set_country_flag = pe_pirate_raid_target
             save_event_target_as = pe_pirate_raid_target
         }
         random_country = {
@@ -412,6 +413,7 @@ country_event = {
             }
             create_fleet = {
                 name = "NAME_Pirate_Fleet"
+                settings = { spawn_debris = no }
                 effect = {
                     set_fleet_flag = pe_pirate_raiders
                     set_owner = PREV
@@ -431,11 +433,35 @@ country_event = {
                     assign_leader = last_created_leader
                     set_location = event_target:pirate_enclave_fleet
                     queue_actions = {
+                        find_random_system = {
+                            trigger = {
+                                id = "pe_pirate_raid.1.trigger.1"
+                                NOT = {
+                                    has_star_flag = hostile_system
+                                }
+                                any_planet = {
+                                    exists = controller
+                                    controller = { is_same_value = event_target:pe_pirate_raid_target }
+                                }
+                            }
+                            found_system = {
+                                move_to = THIS
+                            }
+                        }
+                        effect = {
+                            id = pe_pirate_raid.1.effect.1
+                            set_fleet_stance = aggressive
+                            set_aggro_range_measure_from = self
+                            set_aggro_range = 100
+                            owner = {
+                                set_faction_hostility = { set_hostile = yes }
+                            }
+                        }
                         repeat = {
                             max_iterations = 10
                             find_random_system = {
                                 trigger = {
-                                    id = "pe_pirate_raid.1.trigger.1"
+                                    id = "pe_pirate_raid.1.trigger.2"
                                     NOT = {
                                         has_star_flag = hostile_system
                                     }
@@ -452,18 +478,9 @@ country_event = {
                                     move_to = THIS
                                 }
                             }
-                            effect = {
-                                id = pe_pirate_raid.1.effect.1
-                                set_fleet_stance = aggressive
-                                set_aggro_range_measure_from = self
-                                set_aggro_range = 100
-                                owner = {
-                                    set_faction_hostility = { set_hostile = yes }
-                                }
-                            }
                             find_closest_planet = {
                                 trigger = {
-                                    id = "pe_pirate_raid.1.trigger.2"
+                                    id = "pe_pirate_raid.1.trigger.3"
                                     OR = {
                                         has_mining_station = yes
                                         has_research_station = yes
@@ -479,6 +496,22 @@ country_event = {
                         }
                         effect = {
                             id = pe_pirate_raid.1.effect.2
+                            owner = {
+                                set_faction_hostility = { set_hostile = no }
+                            }
+                            set_fleet_stance = passive
+                        }
+                        find_random_system = {
+                            trigger = {
+                                id = "pe_pirate_raid.1.trigger.4"
+                                is_same_value = event_target:pirate_enclave_fleet.solar_system
+                            }
+                            found_system = {
+                                move_to = THIS
+                            }
+                        }
+                        effect = {
+                            id = pe_pirate_raid.1.effect.3
                             destroy_fleet = this
                         }
                     }
@@ -488,9 +521,29 @@ country_event = {
     }
 }
 
-# Raiding spoils
+# Raiding fleet has been destroyed. Clear target flag.
 country_event = {
 	id = pe_pirate.8
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+        FromFrom = {
+            has_fleet_flag = pe_pirate_raiders
+        }
+    }
+
+    immediate = {
+        every_country = {
+            limit = {has_country_flag = pe_pirate_raid_target}
+            remove_country_flag = pe_pirate_raid_target
+        }
+    }
+}
+
+# Raiding spoils
+country_event = {
+	id = pe_pirate.9
 	hide_window = yes
 	is_triggered_only = yes
 
@@ -504,27 +557,13 @@ country_event = {
         if = {
             limit = {
                 FromFrom = {
-                    is_ship_size = mining_station
+                    OR = {
+                        is_ship_size = outpost_station
+                        is_ship_size = mining_station
+                    }
                     orbit = {
                         has_resource = {
                             type = energy
-                            amount > 0
-                        }
-                    }
-                }
-            }
-            every_country = {
-                limit = {has_country_flag = pe_pirate_finances_pirates}
-        		country_event = { id = pe_pirate.9 }
-            }
-        }
-        if = {
-            limit = {
-                FromFrom = {
-                    is_ship_size = mining_station
-                    orbit = {
-                        has_resource = {
-                            type = minerals
                             amount > 0
                         }
                     }
@@ -538,10 +577,13 @@ country_event = {
         if = {
             limit = {
                 FromFrom = {
-                    is_ship_size = research_station
+                    OR = {
+                        is_ship_size = outpost_station
+                        is_ship_size = mining_station
+                    }
                     orbit = {
                         has_resource = {
-                            type = physics_research
+                            type = minerals
                             amount > 0
                         }
                     }
@@ -555,7 +597,30 @@ country_event = {
         if = {
             limit = {
                 FromFrom = {
-                    is_ship_size = research_station
+                    OR = {
+                        is_ship_size = outpost_station
+                        is_ship_size = research_station
+                    }
+                    orbit = {
+                        has_resource = {
+                            type = physics_research
+                            amount > 0
+                        }
+                    }
+                }
+            }
+            every_country = {
+                limit = {has_country_flag = pe_pirate_finances_pirates}
+        		country_event = { id = pe_pirate.12 }
+            }
+        }
+        if = {
+            limit = {
+                FromFrom = {
+                    OR = {
+                        is_ship_size = outpost_station
+                        is_ship_size = research_station
+                    }
                     orbit = {
                         has_resource = {
                             type = society_research
@@ -566,7 +631,7 @@ country_event = {
             }
             every_country = {
                 limit = {has_country_flag = pe_pirate_finances_pirates}
-        		country_event = { id = pe_pirate.12 }
+        		country_event = { id = pe_pirate.13 }
             }
         }
         if = {
@@ -583,7 +648,7 @@ country_event = {
             }
             every_country = {
                 limit = {has_country_flag = pe_pirate_finances_pirates}
-        		country_event = { id = pe_pirate.13 }
+        		country_event = { id = pe_pirate.14 }
             }
         }
     }
@@ -591,7 +656,7 @@ country_event = {
 
 # Raiding spoils
 country_event = {
-	id = pe_pirate.9
+	id = pe_pirate.10
 	title = "pe_pirate.loot.title"
 	desc = "pe_pirate.loot.miningstation.energy.desc"
 	picture = GFX_evt_star_chart
@@ -607,7 +672,7 @@ country_event = {
 }
 
 country_event = {
-	id = pe_pirate.10
+	id = pe_pirate.11
 	title = "pe_pirate.loot.title"
 	desc = "pe_pirate.loot.miningstation.minerals.desc"
 	picture = GFX_evt_star_chart
@@ -623,7 +688,7 @@ country_event = {
 }
 
 country_event = {
-	id = pe_pirate.11
+	id = pe_pirate.12
 	title = "pe_pirate.loot.title"
 	desc = "pe_pirate.loot.researchstation.physics.desc"
 	picture = GFX_evt_star_chart
@@ -644,7 +709,7 @@ country_event = {
 }
 
 country_event = {
-	id = pe_pirate.12
+	id = pe_pirate.13
 	title = "pe_pirate.loot.title"
 	desc = "pe_pirate.loot.researchstation.society.desc"
 	picture = GFX_evt_star_chart
@@ -665,7 +730,7 @@ country_event = {
 }
 
 country_event = {
-	id = pe_pirate.13
+	id = pe_pirate.14
 	title = "pe_pirate.loot.title"
 	desc = "pe_pirate.loot.researchstation.engineering.desc"
 	picture = GFX_evt_star_chart
