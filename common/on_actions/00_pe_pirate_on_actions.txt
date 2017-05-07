@@ -25,3 +25,14 @@ on_leader_death = {
 		pe_pirate.6
 	}
 }
+
+
+# This = owner of fleet 1 (destroyed)
+# From = owner of fleet 2 (combatant)
+# FromFrom = fleet 1
+# FromFromFrom = fleet 2
+on_fleet_destroyed_victim = {
+	events = {
+        pe_pirate.8
+	}
+}
