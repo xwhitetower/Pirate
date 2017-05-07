@@ -355,8 +355,8 @@ country_event = {
 	immediate = {
         random_country = {
             limit = {
+                is_country_type = default
                 NOT = {
-                    is_country_type = default
                     has_country_flag = pe_pirate_finances_pirates
                 }
             }
