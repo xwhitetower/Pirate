@@ -394,10 +394,14 @@ country_event = {
                 }
             }
         }
+        every_country = {
+            establish_communications_no_message = last_created_country
+        }
         last_created_country = {
             set_faction_hostility = { set_hostile = no }
             set_country_flag = pirate_enclave_raiders_country
             save_event_target_as = pirate_enclave_raiders
+
             create_leader = {
                 type = admiral
                 species = event_target:pirate_species
