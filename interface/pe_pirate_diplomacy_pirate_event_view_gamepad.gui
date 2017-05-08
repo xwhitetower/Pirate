@@ -1,12 +1,12 @@
 guiTypes = {
-	### ENCLAVE ARTIST EVENT OPTION ###
+	### ENCLAVE PIRATE EVENT OPTION ###
 
 	containerWindowType = {
-		name = "enclave_artist_option_gamepad"
+		name = "pe_pirate_enclave_pirate_option_gamepad"
 		position = { x=0 y=0 }
 		size = { width = 388 height = 30 }
 		moveable = no
-		
+
 		buttonType = {
 			name = "option_button"
 			quadTextureSprite = "GFX_event_button_452_artist"
@@ -14,7 +14,7 @@ guiTypes = {
 			font = "cg_16b"
 			text = "OPTION_TEXT"
 		}
-		
+
 		OverlappingElementsBoxType = {
 			name = "trigger_icons"
 			position = { x = 0  y = 10 }
@@ -25,7 +25,7 @@ guiTypes = {
 	### DEFAULT EVENT WINDOW ###
 
 	containerWindowType = {
-		name = "enclave_artist_window_gamepad"
+		name = "pe_pirate_enclave_pirate_window_gamepad"
 		orientation = center
 		origo = center
 		position = { x = 0  y = 15 }
@@ -49,7 +49,7 @@ guiTypes = {
 			position = { x = 6 y = 22 }
 			alwaysTransparent = yes
 		}
-		
+
 		buttonType = {
 			name = "focus_button"
 			position = { x = -45 y = 12 }
@@ -58,7 +58,7 @@ guiTypes = {
 			buttonFont = "cg_16b"
 			shortcut = "q"
 		}
-		
+
 
 		instantTextBoxType = {
 			name = "heading"
@@ -70,7 +70,7 @@ guiTypes = {
 			fixedSize = yes
 			alwaysTransparent = yes
 		}
-		
+
 		buttonType = {
 			name = "alien_message_background"
 			size = { x = 380 y = 272 }
@@ -78,7 +78,7 @@ guiTypes = {
 			spriteType = "GFX_tiles_dark_area_cut_8"
 			alwaysTransparent = yes
 		}
-		
+
 		instantTextBoxType = {
 			name = "alien_message"
 			font = "cg_16b"
@@ -87,7 +87,7 @@ guiTypes = {
 			maxHeight = 270
 			format = left
 			scrollbartype = "standardlistbox_slider"
-			
+
 		}
 
 		instantTextBoxType = {
@@ -108,27 +108,27 @@ guiTypes = {
 			position = { x = 45 y = 45 }
 			size = { width = 800 height = 350 }
 			clipping = yes
-			
+
 			iconType = {
 				name = "event_picture"
 				spriteType = "GFX_diplomacy_portrait_frame"
 				position = { x = -6 y = -5 }
 			}
-			
+
 			iconType = {
 				name = "portrait"
 				position = { x = 250 y = 0 }
 				spriteType = "GFX_portrait_character"
-			}	
+			}
 		}
-		
+
 		containerWindowType = {
 			name = "portrait"
 			position = { x = 11 y = 42 }
 			size = { width = 890 height = 350 }
 			clipping = yes
-			
-			
+
+
 			iconType = {
 				name = "portrait"
 				spriteType = "GFX_portrait_gamesetup_mask"
@@ -136,7 +136,7 @@ guiTypes = {
 				scale = 0.9
 
 			}
-					
+
 			iconType = {
 				name = "black_frame"
 				spriteType = "GFX_diplomacy_portrait_shadow_frame"
@@ -144,14 +144,14 @@ guiTypes = {
 				alwaysTransparent = yes
 				scale = 0.9
 			}
-			
+
 			iconType = {
 				name = "stripes_1"
 				spriteType = "GFX_diplomacy_stripes_2"
 				alwaysTransparent = yes
 				scale = 0.9
 			}
-				
+
 			iconType = {
 				name = "city_frame"
 				spriteType = "GFX_diplomacy_portrait_frame_artist"
@@ -162,7 +162,7 @@ guiTypes = {
 		}
 
 		### EMPIRE INFO ###
-		
+
 		iconType = {
 			name = "empire_info_bg"
 			spriteType = "GFX_diplomacy_dark_fade_bg"
@@ -193,7 +193,7 @@ guiTypes = {
 			fixedsize = yes
 			text_color_code = "Y"
 		}
-		
+
 		instantTextBoxType={
 			name = "empire_personality_type"
 			font = "cg_16b"
@@ -220,11 +220,11 @@ guiTypes = {
 			orientation = UPPER_LEFT
 			alwaysTransparent = yes
 		}
-		
+
 		containerWindowType = {
 			name = "leader_details"
 			position = { x = 25 y = 75 }
-			
+
 			containerWindowType = {
 				name = "empire_traits_box"
 				position = { x = 0 y = -5 }
@@ -235,7 +235,7 @@ guiTypes = {
 					spriteType = "GFX_tiles_dark_area_cut_8"
 				}
 			}
-			
+
 			instantTextBoxType = {
 				name = "empire_traits_label"
 				position = { x = 214 y = 37 }
@@ -248,13 +248,13 @@ guiTypes = {
 				text = "RULER_TRAITS"
 				alwaysTransparent = yes
 			}
-		
+
 			overlappingElementsBoxType = {
 				name = "leader_traits"
 				position = { x = 215 y = 55 }
 				size = { x = 125 y = 330 }
 			}
-	
+
 			instantTextBoxType = {
 				name = "leader_name"
 				position = { x = 10 y = 0 }
@@ -266,7 +266,7 @@ guiTypes = {
 				text = "Leader Name"
 				text_color_code = "E"
 			}
-	
+
 			instantTextBoxType = {
 				name = "leader_species"
 				position = { x = 10 y = 18 }
@@ -284,13 +284,13 @@ guiTypes = {
 			name = "opinion_window"
 			position = { x = 27 y = 110 }
 			size = { width = 94 height = 30 }
-			
+
 			# Use this for tooltip area, picture comes from somewhere else
 			background = {
 				name = "opinion_bg"
 				spriteType = "GFX_tiled_window_transparent"
 			}
-			
+
 			iconType = {
 				name = "their_opinion_icon"
 				spriteType = "GFX_diplomacy_opinion"
@@ -308,15 +308,15 @@ guiTypes = {
 				alwaysTransparent = yes
 			}
 		}
-		
+
 		### EVENT DIPLO ###
-		
+
 		containerWindowType = {
 			name = "EVENT_DIPLO"
 			position = { x = -3 y = 358 }
 			size = { width=563 height=220 }
 			moveable = no
-			
+
 			instantTextBoxType={
 				name = "action_title"
 				font = "malgun_goth_24"
@@ -324,7 +324,7 @@ guiTypes = {
 				maxWidth = 520
 				alwaysTransparent = yes
 			}
-			
+
 			instantTextBoxType={
 				name = "action_desc"
 				font = "malgun_goth_24"
@@ -336,7 +336,7 @@ guiTypes = {
 				alwaysTransparent = yes
 				text_color_code = "H"
 			}
-			
+
 			listboxType = {
 				name = "option_list"
 				position = { x = 402 y = 20 }
