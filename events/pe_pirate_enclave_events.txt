@@ -513,6 +513,9 @@ country_event = {
                         effect = {
                             id = pe_pirate_raid.1.effect.3
                             destroy_fleet = this
+                            event_target:pe_pirate_raid_target = {
+                                remove_country_flag = pe_pirate_raid_target
+                            }
                         }
                     }
                 }

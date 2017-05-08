@@ -252,6 +252,7 @@ country_event = {
                     destroy_fleet = this
                 }
             }
+            remove_country_flag = pe_pirate_raid_target
         }
 	}
 
