@@ -13,8 +13,8 @@ country_event = {
 
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = "enclave_artist_window"
-	custom_gui_option = "enclave_artist_option"
+	custom_gui = "pe_pirate_enclave_pirate_window"
+	custom_gui_option = "pe_pirate_enclave_pirate_option"
 
 	picture_event_data = {
 		portrait = from
@@ -84,8 +84,8 @@ country_event = {
 	}
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = "enclave_artist_window"
-	custom_gui_option = "enclave_artist_option"
+	custom_gui = "pe_pirate_enclave_pirate_window"
+	custom_gui_option = "pe_pirate_enclave_pirate_option"
 
 	picture_event_data = {
 		portrait = event_target:pirate_enclave
@@ -286,8 +286,8 @@ country_event = {
 	desc = pe_pirate.gamblewindow.desc
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = "enclave_artist_window"
-	custom_gui_option = "enclave_artist_option"
+	custom_gui = "pe_pirate_enclave_pirate_window"
+	custom_gui_option = "pe_pirate_enclave_pirate_option"
 
 	picture_event_data = {
 		portrait = event_target:pirate_enclave
@@ -383,8 +383,8 @@ country_event = {
 	}
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = "enclave_artist_window"
-	custom_gui_option = "enclave_artist_option"
+	custom_gui = "pe_pirate_enclave_pirate_window"
+	custom_gui_option = "pe_pirate_enclave_pirate_option"
 
 	picture_event_data = {
 		portrait = event_target:pirate_enclave
@@ -450,8 +450,8 @@ country_event = {
 
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = "enclave_artist_window"
-	custom_gui_option = "enclave_artist_option"
+	custom_gui = "pe_pirate_enclave_pirate_window"
+	custom_gui_option = "pe_pirate_enclave_pirate_option"
 
 	picture_event_data = {
 		portrait = event_target:pirate_enclave
