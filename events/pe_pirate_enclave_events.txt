@@ -815,7 +815,7 @@ country_event = {
 
 
 country_event = {
-	id = pe_pirate.15
+	id = pe_pirate.16
 	title = "pe_pirate.loot.title"
 	desc = "pe_pirate.loot.ship.science.desc"
 	picture = GFX_evt_star_chart
@@ -828,22 +828,22 @@ country_event = {
         name = "pe_pirate.opt.receive.loot.shipe"
         random_list = {
             1 = { # Huge booty
-                add_mineral = 1000
+                add_minerals = 1000
                 add_energy = 1000
                 add_food = 10
             }
             5 = { # Big booty
-                add_mineral = 500
+                add_minerals = 500
                 add_energy = 500
                 add_food = 10
             }
             24 = { # Normalish booty
-                add_mineral = 250
+                add_minerals = 250
                 add_energy = 250
                 add_food = 10
             }
             70 = { # poor booty
-                add_mineral = 50
+                add_minerals = 50
                 add_energy = 50
                 add_food = 10
             }
