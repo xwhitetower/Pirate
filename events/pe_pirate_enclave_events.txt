@@ -419,7 +419,7 @@ country_event = {
                     set_owner = PREV
                     create_ship_design = {
                         design = "Reaver"
-                        ftl = event_target:pirate_enclave
+                        ftl = warp
                     }
                     while = {
                         count = 10
