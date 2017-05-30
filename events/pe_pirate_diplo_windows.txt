@@ -319,11 +319,17 @@ country_event = {
 				}
 			}
             random_list = {
-                70 = {
+                65 = {
                     set_country_flag = recently_gambled_with_pirates_and_lost_minerals
                 }
-                30 = {
+                20 = {
                     set_country_flag = recently_gambled_with_pirates_and_won_minerals
+                }
+                10 = {
+                    set_country_flag = recently_gambled_with_pirates_and_pirates_cheated
+                }
+                5 = {
+                    set_country_flag = recently_gambled_with_pirates_and_you_cheated
                 }
             }
     		country_event = { id = pe_pirate_window.4 }
@@ -346,11 +352,17 @@ country_event = {
 				}
 			}
             random_list = {
-                70 = {
+                65 = {
                     set_country_flag = recently_gambled_with_pirates_and_lost_energy
                 }
-                30 = {
+                25 = {
                     set_country_flag = recently_gambled_with_pirates_and_won_energy
+                }
+                10 = {
+                    set_country_flag = recently_gambled_with_pirates_and_pirates_cheated
+                }
+                5 = {
+                    set_country_flag = recently_gambled_with_pirates_and_you_cheated
                 }
             }
     		country_event = { id = pe_pirate_window.4 }
@@ -373,10 +385,12 @@ country_event = {
 		trigger = {
 			switch = {
 				trigger = has_country_flag
-				recently_gambled_with_pirates_and_lost_minerals = { text = pe_pirate.ignorewindow.desc.mineralloser }
-				recently_gambled_with_pirates_and_won_minerals = { text = pe_pirate.ignorewindow.desc.mineralwinner }
-				recently_gambled_with_pirates_and_lost_energy = { text = pe_pirate.ignorewindow.desc.energyloser }
-				recently_gambled_with_pirates_and_won_energy = { text = pe_pirate.ignorewindow.desc.energywinner }
+				recently_gambled_with_pirates_and_lost_minerals = { text = pe_pirate.gambleresultswindow.desc.mineralloser }
+				recently_gambled_with_pirates_and_won_minerals = { text = pe_pirate.gambleresultswindow.desc.mineralwinner }
+				recently_gambled_with_pirates_and_lost_energy = { text = pe_pirate.gambleresultswindow.desc.energyloser }
+				recently_gambled_with_pirates_and_won_energy = { text = pe_pirate.gambleresultswindow.desc.energywinner }
+				recently_gambled_with_pirates_and_pirates_cheated = { text = pe_pirate.gambleresultswindow.desc.piratescheated }
+				recently_gambled_with_pirates_and_you_cheated = { text = pe_pirate.gambleresultswindow.desc.youcheated }
 				default = { text = pe_pirate.gambleresultswindow.desc }
 			}
 		}
@@ -397,6 +411,8 @@ country_event = {
             has_country_flag = recently_gambled_with_pirates_and_won_minerals
             has_country_flag = recently_gambled_with_pirates_and_lost_energy
             has_country_flag = recently_gambled_with_pirates_and_won_energy
+            has_country_flag = recently_gambled_with_pirates_and_pirates_cheated
+            has_country_flag = recently_gambled_with_pirates_and_you_cheated
         }
 	}
 
@@ -430,6 +446,30 @@ country_event = {
         }
 		add_energy = 2000
 	}
+	option = {
+		name = GAMBLING_CHEATED
+        trigger = {
+            has_country_flag = recently_gambled_with_pirates_and_pirates_cheated
+        }
+		event_target:pirate_enclave = {
+			add_trust = {
+				who = root
+				amount = -10
+			}
+		}
+	}
+	option = {
+		name = GAMBLING_ACCUSED
+        trigger = {
+            has_country_flag = recently_gambled_with_pirates_and_you_cheated
+        }
+		event_target:pirate_enclave = {
+			add_trust = {
+				who = root
+				amount = -15
+			}
+		}
+	}
 
     after = {
         hidden_effect = {
@@ -437,6 +477,8 @@ country_event = {
             remove_country_flag = recently_gambled_with_pirates_and_lost_energy
             remove_country_flag = recently_gambled_with_pirates_and_won_minerals
             remove_country_flag = recently_gambled_with_pirates_and_won_energy
+            remove_country_flag = recently_gambled_with_pirates_and_pirates_cheated
+            remove_country_flag = recently_gambled_with_pirates_and_you_cheated
             country_event = { id = pe_pirate_window.2 }
         }
     }
